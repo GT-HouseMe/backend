@@ -1,0 +1,1 @@
+// User internship (including company, location, start date, end date, description)

@@ -1,0 +1,1 @@
+// User apartment listing (includes location, rent, start date, end datae, description)
