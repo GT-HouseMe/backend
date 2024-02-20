@@ -1,5 +1,5 @@
-import { User } from "./User.js";
-import mongoose from "mongoose";
+const User = require('./User.js');
+const mongoose = require('mongoose');
 
 // An example model for reference (does not have anything to do with this project)
 const bookSchema = mongoose.Schema(
@@ -27,4 +27,4 @@ const bookSchema = mongoose.Schema(
     }
 )
 
-export const Book = mongoose.model('Book', bookSchema);
+module.exports = mongoose.model('Book', bookSchema);

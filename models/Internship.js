@@ -1,5 +1,5 @@
 // User internship (including company, location, start date, end date, description)
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 
 const internshipSchema = mongoose.Schema(
   {

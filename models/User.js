@@ -1,8 +1,8 @@
 // User using the site (includes name, email, password, description, etc.)
-import { Listing } from "./Listing.js";
-import { Internship } from "./Internship.js"
-import { Conversation } from "./Conversation.js"
-import mongoose from "mongoose";
+const Listing = require('./Listing.js');
+const Internship = require('./Internship.js')
+const Conversation = require('./Conversation.js');
+const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema(
     {
@@ -41,4 +41,4 @@ const userSchema = mongoose.Schema(
     }
 )
 
-export const User = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);

@@ -1,5 +1,5 @@
 // User apartment listing (includes location, rent, start date, end date, description)
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 
 const listingSchema = mongoose.Schema(
   {
