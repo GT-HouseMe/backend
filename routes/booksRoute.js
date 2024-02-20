@@ -1,5 +1,5 @@
 // an example set of post/get/put/delete routes that is not relevant to this project
-const Book = require('../models/bookModel.js');
+const Book = require('../models/Book.js');
 const express = require('express');
 const router = express.Router();
 

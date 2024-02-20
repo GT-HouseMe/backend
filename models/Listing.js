@@ -1,5 +1,6 @@
 // User apartment listing (includes location, rent, start date, end date, description)
 const mongoose = require('mongoose');
+const User = require('./User.js');
 
 const listingSchema = mongoose.Schema(
   {
@@ -22,16 +23,11 @@ const listingSchema = mongoose.Schema(
     description: {
       type: String,
       required: true,
-    },
-    createdBy: {
-      ref: User,
-      type: mongoose.Types.ObjectId,
-      required: true,
-    },
+    }
   },
   {
     timestamps: true,
   }
 );
 
-export const Listing = mongoose.model("Listing", listingSchema);
+module.exports = mongoose.model("Listing", listingSchema);

@@ -1,5 +1,5 @@
-const User = require('./User.js');
 const mongoose = require('mongoose');
+const User = require('./User.js');
 
 // An example model for reference (does not have anything to do with this project)
 const bookSchema = mongoose.Schema(
@@ -14,11 +14,6 @@ const bookSchema = mongoose.Schema(
         },
         publishYear: {
             type: Number,
-            required: true
-        },
-        createdBy: {
-            type: mongoose.Types.ObjectId,
-            ref: User,
             required: true
         }
     },

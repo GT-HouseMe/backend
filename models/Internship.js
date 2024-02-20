@@ -1,5 +1,6 @@
 // User internship (including company, location, start date, end date, description)
 const mongoose = require('mongoose');
+const User = require('./User.js');
 
 const internshipSchema = mongoose.Schema(
   {
@@ -22,16 +23,11 @@ const internshipSchema = mongoose.Schema(
     description: {
       type: String,
       required: true,
-    },
-    createdBy: {
-      ref: User,
-      type: mongoose.Types.ObjectId,
-      required: true,
-    },
+    }
   },
   {
     timestamps: true,
   }
 );
 
-export const Internship = mongoose.model("Internship", internshipSchema);
+module.exports = mongoose.model("Internship", internshipSchema);

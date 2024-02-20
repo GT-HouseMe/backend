@@ -22,14 +22,14 @@ const userSchema = mongoose.Schema(
             type: String,
             required: true
         },
-        // listing:  {
-        //     type: mongoose.Types.ObjectId,
-        //     ref: Listing
-        // },
-        // internship: {
-        //     type: mongoose.Types.ObjectId,
-        //     ref: Internship
-        // }
+        listings:  [{
+            type: mongoose.Types.ObjectId,
+            ref: 'Listing'
+        }],
+        internships: [{
+            type: mongoose.Types.ObjectId,
+            ref: 'Internship'
+        }]
         /*conversations: {
             type: [mongoose.Types.ObjectId],
             ref: Conversation
