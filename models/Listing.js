@@ -1,4 +1,4 @@
-// User apartment listing (includes location, rent, start date, end datae, description)
+// User apartment listing (includes location, rent, start date, end date, description)
 import mongoose from "mongoose";
 
 const listingSchema = mongoose.Schema(
