@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 
 const booksRoute = require('./routes/booksRoute.js')
-const listingsRoute = require('./routes/listingsRoute.js')
 const internshipsRoute = require('./routes/internshipsRoute.js')
 
 const app = express()
