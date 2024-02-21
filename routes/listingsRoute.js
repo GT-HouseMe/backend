@@ -1,9 +1,7 @@
-// an example set of post/get/put/delete routes that is not relevant to this project
 const Listing = require('../models/Listing.js');
 const express = require('express');
 const router = express.Router();
 
-// Route for saving a new Book to database
 router.post('/', async (request, response) => {
   try {
     if (
@@ -20,8 +18,8 @@ router.post('/', async (request, response) => {
     const newListing = {
         location: request.body.location,
         rent: request.body.rent,
-        startDate: new Date(request.body.startDate),
-        endDate: new Date(request.body.endDate),
+        startDate: request.body.startDate,
+        endDate: request.body.endDate,
         description: request.body.description
     };
 
@@ -34,14 +32,13 @@ router.post('/', async (request, response) => {
   }
 });
 
-// Route for Getting All Books from the database
 router.get('/', async (request, response) => {
   try {
-    const books = await Book.find({});
+    const listings = await Listing.find({});
 
     return response.status(200).json({
-      count: books.length,
-      data: books,
+      count: listings.length,
+      data: listings,
     });
   } catch (error) {
     console.log(error.message);
@@ -54,9 +51,9 @@ router.get('/:id', async (request, response) => {
   try {
     const { id } = request.params;
 
-    const book = await Book.findById(id);
+    const listing = await Listing.findById(id);
 
-    return response.status(200).json(book);
+    return response.status(200).json(listing);
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
@@ -67,24 +64,26 @@ router.get('/:id', async (request, response) => {
 router.put('/:id', async (request, response) => {
   try {
     if (
-      !request.body.title ||
-      !request.body.author ||
-      !request.body.publishYear
+        !request.body.location ||
+        !request.body.rent ||
+        !request.body.startDate ||
+        !request.body.endDate ||
+        !request.body.description
     ) {
       return response.status(400).send({
-        message: 'Send all required fields: title, author, publishYear',
+        message: 'Send all required fields: location, rent, start date, end date, and description',
       });
     }
 
     const { id } = request.params;
 
-    const result = await Book.findByIdAndUpdate(id, request.body);
+    const result = await Listing.findByIdAndUpdate(id, request.body);
 
     if (!result) {
-      return response.status(404).json({ message: 'Book not found' });
+      return response.status(404).json({ message: 'Listing not found' });
     }
 
-    return response.status(200).send({ message: 'Book updated successfully' });
+    return response.status(200).send({ message: 'Listing updated successfully' });
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
@@ -96,13 +95,13 @@ router.delete('/:id', async (request, response) => {
   try {
     const { id } = request.params;
 
-    const result = await Book.findByIdAndDelete(id);
+    const result = await Listing.findByIdAndDelete(id);
 
     if (!result) {
-      return response.status(404).json({ message: 'Book not found' });
+      return response.status(404).json({ message: 'Listing not found' });
     }
 
-    return response.status(200).send({ message: 'Book deleted successfully' });
+    return response.status(200).send({ message: 'Listing deleted successfully' });
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
