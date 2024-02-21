@@ -3,12 +3,14 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 
 const booksRoute = require('./routes/booksRoute.js')
+const listingsRoute = require('./routes/listingsRoute.js')
 
 const app = express()
 
 app.use(express.json())
 
 app.use('/books', booksRoute);
+app.use('/listing', listingsRoute);
 
 app.get('/', (req, res) => {
     res.status(200).json({"message":"hello!"})
