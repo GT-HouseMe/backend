@@ -21,7 +21,7 @@ const userSchema = mongoose.Schema(
         description: {
             type: String,
             required: true
-        },
+        }
         // listings:  [{
         //     type: mongoose.Types.ObjectId,
         //     ref: 'Listing'
@@ -41,4 +41,5 @@ const userSchema = mongoose.Schema(
     }
 )
 
-module.exports = mongoose.model('User', userSchema);
+var User = mongoose.model('User', userSchema);
+module.exports = User;
