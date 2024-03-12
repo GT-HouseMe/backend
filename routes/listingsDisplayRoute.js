@@ -30,3 +30,5 @@ router.get('/', async (request, response) => {
       response.status(500).send({ message: error.message });
     }
   });
+
+  module.exports = router;
