@@ -10,18 +10,19 @@ const listingsRoute = require('./routes/listingsRoute.js')
 const internshipsDisplayRoute = require('./routes/internshipsDisplayRoute.js')
 const listingsDisplayRoute = require('./routes/listingsDisplayRoute.js')
 
+const auth = require('./middleware/auth.js')
+
 const app = express()
 app.use(cors())
 
 app.use(express.json())
 
 app.use('/auth', userRoute);
-// app.use('/books', booksRoute);
 app.use('/internshipsDisplay', internshipsDisplayRoute);
 app.use('/listingsDisplay', listingsDisplayRoute);
 
-app.use('/internships', internshipsRoute)
-app.use('/listings', listingsRoute);
+app.use('/internships', auth, internshipsRoute)
+app.use('/listings', auth, listingsRoute);
 
 app.get('/', (req, res) => {
     res.status(200).json({"message":"hello!"})

@@ -38,17 +38,15 @@ router.post('/register', async(request, response) => {
 router.post('/login', async(request, response) => {
   try {
     if (
-      !request.body.name ||
       !request.body.email ||
-      !request.body.password ||
-      !request.body.description
+      !request.body.password
     ) {
       return response.status(400).send({
-        message: 'Send all required fields: name, email, password, description',
+        message: 'Send all required fields: email and password',
       });
     }
 
-    const { name, email, password } = request.body;
+    const { email, password } = request.body;
     const user = await User.findOne({ email });
 
     if (user.password == password){

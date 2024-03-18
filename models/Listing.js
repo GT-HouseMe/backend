@@ -23,6 +23,11 @@ const listingSchema = mongoose.Schema(
     description: {
       type: String,
       required: true,
+    },
+    createdBy: {
+      type: mongoose.Types.ObjectId,
+      ref: User,
+      required: true
     }
   },
   {

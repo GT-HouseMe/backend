@@ -23,6 +23,7 @@ router.post('/', async (request, response) => {
         startDate : request.body.startDate,
         endDate : request.body.endDate,
         description : request.body.description,
+        createdBy : request.user.userId
     };
 
     const listing = await Listing.create(newListing);
@@ -38,7 +39,7 @@ router.post('/', async (request, response) => {
 // Route to get all listings from our database
 router.get('/', async (request, response) => {
   try {
-    const listings = await Listing.find({});
+    const listings = await Listing.find({ createdBy: request.user.userId });
 
     return response.status(200).json({
       count: listings.length,
@@ -55,7 +56,7 @@ router.get('/:id', async (request, response) => {
   try {
     const { id } = request.params;
 
-    const listing = await Listing.findById(id);
+    const listing = await Listing.findOne({_id: id, createdBy: request.user.userId});
 
     return response.status(200).json(listing);
   } catch (error) {
@@ -81,7 +82,7 @@ router.put('/:id', async (request, response) => {
 
     const { id } = request.params;
 
-    const result = await Listing.findByIdAndUpdate(id, request.body);
+    const result = await Listing.findOneAndUpdate({_id: id, createdBy: request.user.userId}, request.body);
 
     if (!result) {
       return response.status(404).json({ message: 'Listing not found' });
@@ -99,7 +100,7 @@ router.delete('/:id', async (request, response) => {
   try {
     const { id } = request.params;
 
-    const result = await Listing.findByIdAndDelete(id);
+    const result = await Listing.findOneAndDelete({_id: id, createdBy: request.user.userId});
 
     if (!result) {
       return response.status(404).json({ message: 'Listing not found' });
