@@ -23,6 +23,7 @@ router.post('/', async (request, response) => {
         startDate : request.body.startDate,
         endDate : request.body.endDate,
         description : request.body.description,
+        createdBy : request.user.userId
     };
 
     const internship = await Internship.create(newInternship);
@@ -37,7 +38,7 @@ router.post('/', async (request, response) => {
 // Route for Getting All Internships from the database
 router.get('/', async (request, response) => {
   try {
-    const internships = await Internship.find({});
+    const internships = await Internship.find({ createdBy: request.user.userId });
 
     return response.status(200).json({
       count: internships.length,
@@ -54,7 +55,7 @@ router.get('/:id', async (request, response) => {
   try {
     const { id } = request.params;
 
-    const internship = await Internship.findById(id);
+    const internship = await Internship.findOne({_id: id, createdBy: request.user.userId});
 
     return response.status(200).json(internship);
   } catch (error) {
@@ -80,7 +81,7 @@ router.put('/:id', async (request, response) => {
 
     const { id } = request.params;
 
-    const result = await Internship.findByIdAndUpdate(id, request.body);
+    const result = await Internship.findOneAndUpdate({_id: id, createdBy: request.user.userId}, request.body);
 
     if (!result) {
       return response.status(404).json({ message: 'Internship not found' });
@@ -98,7 +99,7 @@ router.delete('/:id', async (request, response) => {
   try {
     const { id } = request.params;
 
-    const result = await Internship.findByIdAndDelete(id);
+    const result = await Internship.findOneAndDelete({_id: id, createdBy: request.user.userId});
 
     if (!result) {
       return response.status(404).json({ message: 'Internship not found' });

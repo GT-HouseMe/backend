@@ -22,19 +22,6 @@ const userSchema = mongoose.Schema(
             type: String,
             required: true
         }
-        // listings:  [{
-        //     type: mongoose.Types.ObjectId,
-        //     ref: 'Listing'
-        // }],
-        // internships: [{
-        //     type: mongoose.Types.ObjectId,
-        //     ref: 'Internship'
-        // }]
-        /*conversations: {
-            type: [mongoose.Types.ObjectId],
-            ref: Conversation
-        }*/
-        // not 100% sure how to do this
     },
     {
         timestamps: true,
