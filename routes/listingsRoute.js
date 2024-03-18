@@ -113,5 +113,14 @@ router.delete('/:id', async (request, response) => {
   }
 });
 
+router.post('/upload_photos', async (request, response) => {
+  try {
+
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+})
+
 module.exports = router;
 
