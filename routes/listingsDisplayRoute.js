@@ -64,4 +64,13 @@ router.get('/price/:price', async (request, response) => {
   }
 });
 
+router.get('/date/:startDate/:endDate', async (request, response) => {
+  try {
+
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+})
+
   module.exports = router;

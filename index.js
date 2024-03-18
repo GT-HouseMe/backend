@@ -4,7 +4,6 @@ require('dotenv').config()
 const cors = require('cors')
 
 const userRoute = require('./routes/authRoute.js')
-const booksRoute = require('./routes/booksRoute.js')
 const internshipsRoute = require('./routes/internshipsRoute.js')
 const listingsRoute = require('./routes/listingsRoute.js')
 const internshipsDisplayRoute = require('./routes/internshipsDisplayRoute.js')
