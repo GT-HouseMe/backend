@@ -1,7 +1,4 @@
 // User using the site (includes name, email, password, description, etc.)
-const Listing = require('./Listing.js');
-const Internship = require('./Internship.js')
-const Conversation = require('./Conversation.js');
 const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema(
@@ -29,5 +26,4 @@ const userSchema = mongoose.Schema(
     }
 )
 
-var User = mongoose.model('User', userSchema);
-module.exports = User;
+module.exports = mongoose.model('User', userSchema);
