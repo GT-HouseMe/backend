@@ -116,10 +116,9 @@ router.delete('/:id', async (request, response) => {
   }
 });
 
-router.post('/upload_photos', async (request, response) => {
-  try {
-    upload.array(request.file);
-    return response.status(200).send({ message: 'Photos uploaded successfully' });
+router.post('/upload_photos', upload.any('file'), async (request, response) => {
+  try { 
+    return response.status(200).send({ message: "Success" });
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
