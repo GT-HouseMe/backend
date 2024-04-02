@@ -54,4 +54,23 @@ router.get('/date/:startDate/:endDate', async (request, response) => {
     }
 });
 
+router.get('/location/:loc', async (request, response) => {
+    try {
+        const { loc } = request.params;
+
+        const internships = await Internship.find({
+            location : loc
+        });
+
+        return response.status(200).json({
+            count: internships.length,
+            data: internships,
+        });
+
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({ message: error.message });
+    }
+});
+
 module.exports = router;
