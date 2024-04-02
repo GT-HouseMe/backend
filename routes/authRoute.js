@@ -25,7 +25,7 @@ router.post('/register', async(request, response) => {
         const user = await User.create(newUser);
         const { name, email, password } = request.body;
         const userFound = await User.findOne({ email });
-        const token = jwt.sign({ userId: user._id, name: user.name}, process.env.JWT_Secret, {
+        const token = jwt.sign({ userId: user._id, name: user.name}, process.env.JWT_SECRET, {
             expiresIn: '30d'
         });
         return response.status(200).json({ user: {name: user.name}, token});
@@ -50,7 +50,7 @@ router.post('/login', async(request, response) => {
     const user = await User.findOne({ email });
 
     if (user.password == password){
-      const token = jwt.sign({ userId: user._id, name: user.name}, process.env.JWT_Secret, {
+      const token = jwt.sign({ userId: user._id, name: user.name}, process.env.JWT_SECRET, {
         expiresIn: '30d'
       });
       return response.status(201).json({
