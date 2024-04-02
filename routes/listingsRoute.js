@@ -1,5 +1,8 @@
 const Listing = require('../models/Listing.js');
 const express = require('express');
+const multer = require('multer');
+
+const upload = multer({ dest: 'uploads/' })
 const router = express.Router();
 
 // Route to save new listing to our database 
@@ -115,7 +118,8 @@ router.delete('/:id', async (request, response) => {
 
 router.post('/upload_photos', async (request, response) => {
   try {
-
+    upload.array(request.file);
+    return response.status(200).send({ message: 'Photos uploaded successfully' });
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
