@@ -26,7 +26,8 @@ router.post('/', async (request, response) => {
         startDate : request.body.startDate,
         endDate : request.body.endDate,
         description : request.body.description,
-        createdBy : request.user.userId
+        createdBy : request.user.userId,
+        photo_file_names : []
     };
 
     const listing = await Listing.create(newListing);
@@ -116,8 +117,18 @@ router.delete('/:id', async (request, response) => {
   }
 });
 
-router.post('/upload_photos', upload.any('file'), async (request, response) => {
+router.post('/upload_photos/:id', upload.any('file'), async (request, response) => {
   try { 
+    const { id } = request.params;
+
+    const result = await Listing.findOne({_id: id, createdBy: request.user.userId})
+    let photo_arr = result.photo_file_names.slice()
+    for (let i = 0; i < request.files.length; i++) {
+      let f = request.files[i]
+      photo_arr.push(f.filename)
+    }
+    const out = await Listing.findOneAndUpdate({_id: id}, {photo_file_names: photo_arr})
+
     return response.status(200).send({ message: "Success" });
   } catch (error) {
     console.log(error.message);

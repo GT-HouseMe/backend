@@ -28,7 +28,12 @@ const listingSchema = mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: User,
       required: true
-    }
+    },
+    photo_file_names: [
+      {
+        type: String
+      }
+    ]
   },
   {
     timestamps: true,
