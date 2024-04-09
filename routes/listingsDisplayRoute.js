@@ -2,10 +2,14 @@ const Listing = require('../models/Listing.js');
 const express = require('express');
 const router = express.Router();
 
-// Route to get all listings from our database
+// Route for Getting All Listings from the database with pagination
 router.get('/', async (request, response) => {
     try {
-        const listings = await Listing.find({});
+        const page = parseInt(request.query.page) || 1; // Parse the page number from query parameter, default to 1 if not provided
+        const limit = 10; // Number of results per page
+        const startIndex = (page - 1) * limit;
+
+        const listings = await Listing.find({}).skip(startIndex).limit(limit);
 
         return response.status(200).json({
             count: listings.length,
