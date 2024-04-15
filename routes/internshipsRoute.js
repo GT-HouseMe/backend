@@ -42,7 +42,7 @@ router.get('/', async (request, response) => {
 
     return response.status(200).json({
       count: internships.length,
-      data: internships,
+      data: [internships],
     });
   } catch (error) {
     console.log(error.message);

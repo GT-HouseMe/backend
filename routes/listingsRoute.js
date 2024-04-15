@@ -49,7 +49,7 @@ router.get('/', async (request, response) => {
 
     return response.status(200).json({
       count: listings.length,
-      data: listings,
+      data: [listings],
     });
   } catch (error) {
     console.log(error.message);
