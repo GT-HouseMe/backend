@@ -2,10 +2,14 @@ const Internship = require('../models/Internship.js');
 const express = require('express');
 const router = express.Router();
 
-// Route for Getting All Internships from the database
+// Route for Getting All Internships from the database with pagination
 router.get('/', async (request, response) => {
     try {
-        const internships = await Internship.find({});
+        const page = parseInt(request.query.page) || 1; // Parse the page number from query parameter, default to 1 if not provided
+        const limit = 10; // Number of results per page
+        const startIndex = (page - 1) * limit;
+
+        const internships = await Internship.find({}).skip(startIndex).limit(limit);
 
         return response.status(200).json({
             count: internships.length,
@@ -59,7 +63,7 @@ router.get('/location/:loc', async (request, response) => {
         const { loc } = request.params;
 
         const internships = await Internship.find({
-            location : loc
+            location: loc
         });
 
         return response.status(200).json({
