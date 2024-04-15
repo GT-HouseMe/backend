@@ -3,6 +3,19 @@ const User = require('../models/User.js');
 const router = express.Router();
 const jwt = require('jsonwebtoken')
 
+router.get('/details/:id', async(request, response) => {
+  try {
+      const { id } = request.params;
+
+      const user = await User.findById(id);
+
+      return response.status(200).json(user);
+  } catch (error) {
+      console.log(error.message);
+      response.status(500).send({ message: error.message });
+  }
+});
+
 router.post('/register', async(request, response) => {
     try {
         if (
