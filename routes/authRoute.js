@@ -23,12 +23,10 @@ router.post('/register', async(request, response) => {
         };
         
         const user = await User.create(newUser);
-        const { name, email, password } = request.body;
-        const userFound = await User.findOne({ email });
         const token = jwt.sign({ userId: user._id, name: user.name}, process.env.JWT_SECRET, {
             expiresIn: '30d'
         });
-        return response.status(200).json({ user: {name: user.name}, token});
+        return response.status(200).json({ userId: user._id, token});
       } catch (error) {
         console.log(error.message);
         response.status(500).send({ message: error.message });
@@ -54,7 +52,7 @@ router.post('/login', async(request, response) => {
         expiresIn: '30d'
       });
       return response.status(201).json({
-        user: {name: user.name},
+        userId: user._id,
         token
       });
     } else{
