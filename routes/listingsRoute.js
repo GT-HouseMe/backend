@@ -9,6 +9,7 @@ const router = express.Router();
 router.post('/', async (request, response) => {
   try {
     if (
+      !request.body.name ||
       !request.body.location ||
       !request.body.rent ||
       !request.body.startDate ||
@@ -21,6 +22,7 @@ router.post('/', async (request, response) => {
       
       }
     const newListing = {
+        name: request.body.name,
         location : request.body.location,
         rent : request.body.rent,
         startDate : request.body.startDate,
@@ -73,6 +75,7 @@ router.get('/:id', async (request, response) => {
 router.put('/:id', async (request, response) => {
   try {
     if (
+        !request.body.name ||
         !request.body.location ||
         !request.body.rent ||
         !request.body.startDate ||

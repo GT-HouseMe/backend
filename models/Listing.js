@@ -4,6 +4,10 @@ const User = require('./User.js');
 
 const listingSchema = mongoose.Schema(
   {
+    name: {
+      type: String,
+      required: true,
+    },
     location: {
       type: String,
       required: true,
