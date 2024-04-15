@@ -26,7 +26,7 @@ router.get('/:id', async (request, response) => {
     try {
         const { id } = request.params;
 
-        const internship = await Internship.findById(id);
+        const internship = await Internship.findById(id).populate("createdBy");;
 
         return response.status(200).json(internship);
     } catch (error) {

@@ -26,7 +26,7 @@ router.get('/:id', async (request, response) => {
     try {
         const { id } = request.params;
 
-        const listing = await Listing.findById(id);
+        const listing = await Listing.findById(id).populate("createdBy");
 
         return response.status(200).json(listing);
     } catch (error) {
